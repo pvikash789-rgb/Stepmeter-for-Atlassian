@@ -15,7 +15,7 @@ We answer three questions:
 ## Day 1: Set up a test site
 
 1. Create a free Atlassian Cloud site with Jira at atlassian.com (any name, e.g. `stepcost-lab`). Use an email you can keep long term.
-2. Create one Scrum project (e.g. `LAB`) and add about 30 issues. Give some sub-tasks, a few labels and mixed priorities so rules have something to act on.
+2. Create one Scrum project (e.g. `LAB`) and add about 30 work items. Give some of them sub-tasks, a few labels and mixed priorities so rules have something to act on.
 3. Create the test rules in the next section (Project settings, then Automation, or the global Automation page).
 4. Create an API token for your Atlassian account (Account settings, then Security, then API tokens). Treat it like a password.
 
@@ -73,7 +73,7 @@ Redacted copies of each rule are saved in `phase0/output/`. That folder is git-i
 
 1. Open the automation usage view for your site, and the organisation's Platform usage page (Atlassian Administration, then Insights).
 2. Note exactly what you can see per rule: runs, steps, both or neither. Take screenshots.
-3. Let the rules run for a day or two by editing and moving issues. Compare Atlassian's step count with the script's floor estimate. This is the first accuracy data point for Phase 1.
+3. Let the rules run for a day or two by editing and moving work items. Compare Atlassian's step count with the script's floor estimate. This is the first accuracy data point for Phase 1.
 
 ## Days 2 to 3: Talk to Jira admins
 

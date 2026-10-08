@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vikash PM Decision Log</title>
+<title>Stepmeter Decision Log</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -71,198 +71,110 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
-<nav style="max-width:860px;margin:0 auto;padding:16px 16px 0;font-family:var(--mono);font-size:.8rem"><a href="index.html">Build journal &rarr;</a> &middot; <a href="https://github.com/pvikash789-rgb/Stepmeter-for-Atlassian">Code on GitHub</a></nav>
-
+<nav style="max-width:860px;margin:0 auto;padding:16px 16px 0;font-family:var(--mono);font-size:.8rem"><a href="index.html">Build journal &rarr;</a> &middot; <a href="https://github.com/pvikash789-rgb/stepmeter-for-jira">Code on GitHub</a></nav>
 <div class="wrap">
 <header>
-  <div class="eyebrow">Vikash Kumar · PM job search · Last updated 8 Oct 2026</div>
-  <h1>Proof-of-work decision log</h1>
-  <p>Every important call we make while building portfolio projects for Atlassian, ServiceNow and Salesforce, with the reasoning behind it. Newest decisions go at the bottom of the ledger.</p>
+  <div class="eyebrow">Stepmeter for Jira · Decision log · Vikash Kumar · Last updated 8 Oct 2026</div>
+  <h1>Decision log</h1>
+  <p>The main product decisions behind Stepmeter for Jira, with the reasoning and the alternatives I considered. Newest at the bottom.</p>
 </header>
 
-<section aria-labelledby="status">
-  <h2 id="status">Where each build stands</h2>
-  <div class="strip">
-    <div class="co"><div class="row"><h3>Atlassian</h3><span class="pill now">Validating</span></div><small>Build 1 of 3. Dream company. Stepmeter for Atlassian.</small></div>
-    <div class="co"><div class="row"><h3>ServiceNow</h3><span class="pill next">Not started</span></div><small>Build 2 of 3. Adapt the Atlassian build to ServiceNow ITSM.</small></div>
-    <div class="co"><div class="row"><h3>Salesforce</h3><span class="pill next">Not started</span></div><small>Build 3 of 3. Service Cloud + Agentforce, regulated-industry angle.</small></div>
-  </div>
-</section>
-
-<section aria-labelledby="open">
-  <h2 id="open">Open decision</h2>
-  <div class="open-card">
-    <div class="meta"><span class="pill done">Closed</span><span class="tag">Atlassian</span></div>
-    <h3>Which problem should the Atlassian build solve?</h3>
-    <p><strong>Status:</strong> decided. Vikash picked option 1, the automation step-cost optimizer (D-12). Kept below for the record.</p>
-    <p>Round 2 shortlist (D-11). Every idea below passed the shipped check and the data-access check. Ranked on usefulness and viability only (D-08).</p>
-    <div class="options">
-      <div class="opt rec"><div class="k">1 · Automation step-cost optimizer <span class="pill done">Ranked 1st</span></div><p>Reads every automation rule, estimates the steps each one burns per month under the new metered pricing, ranks the expensive ones and shows how to rewrite them to cost less.</p><p class="why">Metered billing starts 3 Dec 2026 for nearly every cloud org, overage is on by default, and Enterprise loses unlimited automation. Atlassian's native view is per meter and app, not per rule. Risk: rule data needs an admin API token, so it ships as a web tool, not a Forge app. Verify API access on day 1.</p></div>
-      <div class="opt rec"><div class="k">2 · "I'm affected too" for the JSM portal <span class="pill done">Close 2nd</span></div><p>Agents mark a ticket as a known issue. Portal customers see it and click "I'm affected too" instead of filing a duplicate, and get every update. Agents see how many customers are hit.</p><p class="why">JSDCLOUD-1743 has 491 votes and has been open since 2015. No Cloud app does it. Forge portal modules can run for customers, so it's fully buildable and Marketplace-shippable. Risk: Atlassian marks it "Reviewing".</p></div>
-      <div class="opt"><div class="k">3 · Idea-to-delivery sync for Product Discovery</div><p>Keeps each Product Discovery idea's status in step with its linked epics and flags mismatches.</p><p class="why">Clear gap, but evidence is community threads, not votes, and Forge write access to ideas needs a spike.</p></div>
-      <div class="opt"><div class="k">4 · Broken-link checker for Confluence</div><p>Finds dead page, Jira and smart links across a space.</p><p class="why">108 votes, very buildable, but an established app already has 572 installs.</p></div>
-    </div>
-    <p class="note">Considered and set aside this round: expiring "Verified" pages and approval reminders (crowded with new apps getting 1 to 4 installs), sprint carryover tracking (crowded), CSAT insights and long-term SLA history (Atlassian signalling it will build them), MCP usage dashboard and leaver handoff (thin demand), anything on Teamwork Graph (early access only). Round 1 options A to E are below for the record.</p>
-    <h3>Round 1 (closed)</h3>
-    <div class="options">
-      <div class="opt"><div class="k">E · Knowledge gap finder <span class="pill open">Dropped, already shipped</span></div><p>Reads resolved tickets, groups recurring questions that no help-center article answers, and drafts the missing article from how agents actually resolved them, for a human to approve.</p><p class="why">Any JSM team with a help center has this pain, not just Premium. AI deflection depends on article coverage. Data comes from standard Jira and Confluence APIs. Value is countable: tickets a month that could be self-served. Must verify Atlassian doesn't already ship this.</p></div>
-      <div class="opt"><div class="k">A · Triage accuracy monitor <span class="pill next">2nd</span></div><p>Compares Service Triage suggestions with what agents finally set, by request type and over time.</p><p class="why">Useful, but only for teams on Premium or Enterprise using Service Triage. Unclear whether the agent's original suggestion is recoverable from ticket history.</p></div>
-      <div class="opt"><div class="k">C · Eval harness for Forge agents <span class="pill next">3rd</span></div><p>Offline test runner for Rovo agents built as Forge apps.</p><p class="why">Fully buildable, real gap. Small audience of Marketplace developers.</p></div>
-      <div class="opt"><div class="k">B · Agent governance roll-up <span class="pill open">Thesis only</span></div><p>One admin view of every Rovo agent's evals, usage and inactivity.</p><p class="why">Strongest demand signal, but no public API exposes agent data today, so it can't be built as a real product. Use it as a written thesis instead.</p></div>
-      <div class="opt"><div class="k">D · Scope boundary tester <span class="pill open">Dropped</span></div><p>Probes agents with out-of-scope questions.</p><p class="why">There's no supported way to call a Rovo agent from backend code, so automated probing isn't viable.</p></div>
-    </div>
-  </div>
-</section>
-
 <section aria-labelledby="ledger">
-  <h2 id="ledger">Decision ledger</h2>
+  <h2 id="ledger">Decisions</h2>
   <div class="ledger">
 
-    <article class="entry"><div class="id">D-01<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Strategy</span></div>
-      <h3>Build public proof-of-work instead of relying on applications alone</h3>
-      <dl><dt>Why</dt><dd>The resume shows consulting PM work but no live product owned after launch, and there is a gap since Jan 2026. Something shipped and public addresses all three.</dd>
-      <dt>Instead of</dt><dd>Cold applications, or a written critique of their products with nothing built.</dd></dl>
+    <article class="entry"><div class="id">01<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Problem selection</span></div>
+      <h3>Choose the problem on usefulness and viability</h3>
+      <dl><dt>Criteria</dt><dd>How many teams have the problem. Whether an outside tool can reach the data it needs. Whether a first version can reach real users in about four weeks. Whether the value can be measured.</dd>
+      <dt>Not used</dt><dd>Fit with my own past experience. It can break a tie, nothing more.</dd></dl>
     </div></article>
 
-    <article class="entry"><div class="id">D-02<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Targets</span></div>
-      <h3>Target Atlassian, ServiceNow and Salesforce</h3>
-      <dl><dt>Why</dt><dd>All three are betting on enterprise agents (Rovo, Now Platform agents, Agentforce). Vikash's agent work in insurance (evals, thresholds, human handoff, shadow mode) is exactly what their customers struggle with.</dd>
-      <dt>Note</dt><dd>Atlassian is the dream company even though the fit is less direct: its core is team collaboration and product-led growth, which the resume doesn't show. The bridge has to be built deliberately.</dd></dl>
+    <article class="entry"><div class="id">02<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Dropped</span><span class="tag">Jira Service Management</span></div>
+      <h3>Don't build an AI request triage agent</h3>
+      <dl><dt>Why</dt><dd>The Service Triage Rovo agent already suggests request type, urgency and priority, and flags requests that may need escalation.</dd></dl>
     </div></article>
 
-    <article class="entry"><div class="id">D-03<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Positioning</span></div>
-      <h3>One core idea, built three times</h3>
-      <dl><dt>Decision</dt><dd>A service-workflow agent idea with measurable accuracy and smart human handoff, adapted to each platform.</dd>
-      <dt>Why</dt><dd>Much of the thinking (eval logic, escalation rules, metrics) carries over, so builds 2 and 3 are adaptations. It also tells one consistent story: "I build trustworthy agents for enterprise service workflows."</dd>
-      <dt>Instead of</dt><dd>Three unrelated projects, which would take longer and dilute the story.</dd></dl>
+    <article class="entry"><div class="id">03<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Dropped</span><span class="tag">Rovo</span></div>
+      <h3>Don't build anything that needs Rovo agent data</h3>
+      <dl><dt>Why</dt><dd>Admins clearly want an organisation-wide view of agent evaluations and usage (ROVO-721, ROVO-154). But there is no public API to list agents or read their usage (ROVO-516), and Rovo can't be called from Forge backend code. An agent governance view or an agent scope tester can't be built properly from outside today.</dd></dl>
     </div></article>
 
-    <article class="entry"><div class="id">D-04<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Sequencing</span></div>
-      <h3>Order: Atlassian, then ServiceNow, then Salesforce</h3>
-      <dl><dt>Why</dt><dd>Atlassian gets the freshest energy and Forge makes it the quickest to ship with real users. ServiceNow ITSM is nearly the same problem as Jira Service Management, so it adapts easily and invites a comparison. Salesforce is the most complex platform and best suits the banking and insurance angle once two versions exist.</dd>
-      <dt>Rough time</dt><dd>About 4 weeks, then 2 to 3, then 3 to 4.</dd></dl>
+    <article class="entry"><div class="id">04<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Dropped</span><span class="tag">Jira Service Management</span></div>
+      <h3>Don't build a knowledge gap finder</h3>
+      <dl><dt>Why</dt><dd>Rovo's knowledge base skill, rolled out from April 2026, finds topics without documentation and drafts Confluence articles from resolved requests for review.</dd>
+      <dt>Change</dt><dd>I had shortlisted this before checking. From here on, checking Atlassian's documentation and release notes for the exact capability is the first step for every idea.</dd></dl>
     </div></article>
 
-    <article class="entry"><div class="id">D-05<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Outreach</span></div>
-      <h3>Reach Senior and Group PMs and IIMB alumni, ask for feedback</h3>
-      <dl><dt>Why</dt><dd>VPs rarely vouch for strangers or read long cold documents. People one or two levels above the target role, and alumni, actually reply. A 15-minute feedback ask often turns into a referral.</dd>
-      <dt>Package</dt><dd>One-page summary, a 3-minute Loom demo, and a public post on LinkedIn or Substack.</dd></dl>
+    <article class="entry"><div class="id">05<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Method</span></div>
+      <h3>Scout widely, then apply three checks</h3>
+      <dl><dt>What</dt><dd>About 20 ideas across Jira and Product Discovery, Confluence and Loom, Jira Service Management, and Rovo with organisation admin.</dd>
+      <dt>Checks</dt><dd>Evidence of demand (votes, Community threads, paid apps). Not already shipped by Atlassian. Data reachable through a public API or Forge module.</dd>
+      <dt>Shortlist</dt><dd>Automation step cost. An "I'm affected too" option on the customer portal (JSDCLOUD-1743, 491 votes). Idea-to-delivery status sync for Product Discovery. A broken-link checker for Confluence (CONFCLOUD-65867, 108 votes).</dd>
+      <dt>Set aside</dt><dd>Expiring page verification, approval reminders and sprint carryover tracking, where several apps already compete. CSAT insights and long-range SLA history, which Atlassian has signalled it is working on.</dd></dl>
     </div></article>
 
-    <article class="entry"><div class="id">D-06<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Outreach</span><span class="tag">Atlassian</span></div>
-      <h3>Pressure-test the Atlassian build before any Atlassian outreach</h3>
-      <dl><dt>Why</dt><dd>There is one first impression at the dream company. Two or three friendly PM reviewers poke holes first, then fixes go in, then outreach starts.</dd></dl>
+    <article class="entry"><div class="id">06<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Chosen</span></div>
+      <h3>Build a tool for automation step cost</h3>
+      <dl><dt>Why</dt><dd>Per-step billing starts on 3 December 2026 for every cloud organisation that uses automation, with extra usage on by default. Cost depends on how each rule is built, and from the public documentation I couldn't find a per-rule cost view. The value can be measured in money.</dd>
+      <dt>Constraints</dt><dd>The Rule Management API takes an admin's API token, not Forge or OAuth, so the first version is a web tool. There is no public API for how often each rule runs, so frequency has to be estimated.</dd>
+      <dt>Risks</dt><dd>Atlassian may add a per-rule view. Estimates may be too rough to trust. Admins may be wary of sharing an API token.</dd></dl>
     </div></article>
 
-    <article class="entry"><div class="id">D-07<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Atlassian</span><span class="tag">From research</span></div>
-      <h3>Don't build a plain ticket-triage agent for Atlassian</h3>
-      <dl><dt>Why</dt><dd>Jira Service Management already ships a Service Triage Rovo agent that suggests request type, urgency and priority, and flags escalations. Rebuilding it would look like we hadn't done our homework.</dd>
-      <dt>Instead</dt><dd>Move to the layer around agents: measuring whether they are right, and giving admins visibility and control. Rovo has per-agent evaluation (CSV datasets up to 100 prompts) and conversation review, but public feature requests ask for an org-wide compliance view and richer audit logs, and admins say they can't trace which sources an agent queried.</dd></dl>
+    <article class="entry"><div class="id">07<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Validation</span></div>
+      <h3>Validate for three days before building</h3>
+      <dl><dt>Checks</dt><dd>The API returns each rule's structure, including nested branches and conditions. What the product already shows per rule. Whether Jira admins already know which of their rules are expensive.</dd>
+      <dt>Stop if</dt><dd>The API can't return rule structure, or most admins interviewed already know their expensive rules. The next shortlisted idea takes over.</dd></dl>
     </div></article>
 
-    <article class="entry"><div class="id">D-08<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Strategy</span></div>
-      <h3>Pick problems on usefulness and viability, not resume fit</h3>
-      <dl><dt>Why</dt><dd>Vikash's call. A product people actually use is the strongest signal to any PM reviewer. Past experience is at most a tiebreaker, and he is open to new domains.</dd>
-      <dt>Criteria</dt><dd>How many teams have the pain. Whether an outside app can get the data. Whether it can reach real users in about 4 weeks. Whether the value can be measured.</dd></dl>
+    <article class="entry"><div class="id">08<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Security</span></div>
+      <h3>Strip secrets before processing, keep no rule data</h3>
+      <dl><dt>Why</dt><dd>The API returns rule configuration in full, including values the UI masks, such as webhook URLs and authorisation headers (AUTO-2207).</dd>
+      <dt>How</dt><dd>Values under secret-looking fields and any URL or credential string are masked before anything is saved. Tested on a sample rule with four planted secrets: all four removed.</dd></dl>
     </div></article>
 
-    <article class="entry"><div class="id">D-09<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Atlassian</span><span class="tag">From research</span></div>
-      <h3>Don't build anything that needs Rovo agent data or backend agent calls</h3>
-      <dl><dt>Why</dt><dd>ROVO-516 (126 votes, still gathering interest) confirms there is no supported public API to list agents or read their usage. A developer thread says Rovo can only be reached from the front end. Agent usage insights live only inside Studio.</dd>
-      <dt>Effect</dt><dd>Governance roll-up becomes a written thesis, not a build. Boundary tester is dropped.</dd></dl>
+    <article class="entry"><div class="id">09<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Process</span></div>
+      <h3>Build in public</h3>
+      <dl><dt>Why</dt><dd>A public repository shows how the work develops over time, not just the end result.</dd>
+      <dt>Guardrails</dt><dd>API tokens stay in a local file that is never committed. Rule data from any real site, even redacted, stays out of the repository.</dd></dl>
     </div></article>
 
-    <article class="entry"><div class="id">D-10<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Atlassian</span><span class="tag">From research</span></div>
-      <h3>Drop the knowledge gap finder: Atlassian already ships it</h3>
-      <dl><dt>Why</dt><dd>Since April 2026, Rovo in Jira Service Management has a manage-knowledge-base skill that finds high-impact topics with no documentation and drafts Confluence articles from resolved tickets for review. Rovo Chat can also compare a ticket's resolution with an existing article and update it.</dd>
-      <dt>Lesson</dt><dd>Before ranking any idea, check Atlassian's release notes, Rovo use-case pages and support docs for that exact capability. This is now step one for every candidate on all three platforms.</dd></dl>
-    </div></article>
-
-    <article class="entry"><div class="id">D-11<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Method</span><span class="tag">Atlassian</span></div>
-      <h3>Scout widely, then gate every idea on three checks</h3>
-      <dl><dt>What we did</dt><dd>Four parallel research tracks: Jira and Product Discovery, Confluence and Loom, Jira Service Management, and Rovo plus admin. About 20 ideas reviewed.</dd>
-      <dt>Gates</dt><dd>Demand evidence (votes, threads, paid apps). Not already shipped by Atlassian. Data reachable through a public API or Forge module. Ideas failing any gate were dropped before ranking.</dd>
-      <dt>Learned</dt><dd>New single-purpose Forge apps on the Marketplace often get only 1 to 4 installs, so distribution is the hard part. Prefer pain that is urgent or long-ignored over pain that many apps already chase.</dd></dl>
-    </div></article>
-
-    <article class="entry"><div class="id">D-12<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Atlassian</span><span class="tag">Build</span></div>
-      <h3>Build the automation step-cost optimizer</h3>
-      <dl><dt>Why</dt><dd>Metered billing starts 3 Dec 2026 and touches nearly every cloud org. Atlassian shows usage per meter and app, not which rules cost the most or how to fix them. Value is measured in money saved.</dd>
-      <dt>Key facts</dt><dd>The rule management API returns each rule's full configuration with an admin API token (no OAuth or Forge), so it ships as a web tool. The API also returns secrets in clear text, so the tool must redact them and never store rule data. There is no public API for how often each rule runs, so run frequency must be estimated or entered by the admin.</dd>
-      <dt>Plan</dt><dd>Phase 0 validation spike (days 1 to 3) with kill criteria, then the cost engine, then recommendations and report, then a beta with 5 to 10 real admins, then launch and outreach before 3 Dec.</dd>
-      <dt>Kill if</dt><dd>The API can't be called as expected, or most admins interviewed say they already know which rules are expensive.</dd></dl>
-    </div></article>
-
-    <article class="entry"><div class="id">D-13<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Distribution</span></div>
-      <h3>Build in public on GitHub from day one</h3>
-      <dl><dt>Why</dt><dd>A public repository gives a timestamped history of the work week by week, which is stronger proof than a finished project that appears all at once. GitHub Pages serves the build journal and this log as a site that is easy to share with recruiters.</dd>
-      <dt>Guardrails</dt><dd>Tokens live only in a local .env file. Rule data from any real site, even redacted, stays in a git-ignored folder. The spike script was tested offline to confirm it strips URLs, headers and tokens.</dd></dl>
-    </div></article>
-
-    <article class="entry"><div class="id">D-14<span>8 Oct</span></div><div class="body">
-      <div class="meta"><span class="pill done">Decided</span><span class="tag">Naming</span></div>
-      <h3>Name it Stepmeter for Atlassian</h3>
-      <dl><dt>Why</dt><dd>"Step" is Atlassian's own billing unit for automation, so the name tells admins and Atlassian PMs what it does at a glance. Atlassian's brand rules don't allow "Atlassian" as a third party's product name, so it follows the accepted "for Atlassian" pattern.</dd>
-      <dt>Instead of</dt><dd>StepWise, which overlaps with an archived Marketplace app called Stepwise Job.</dd></dl>
+    <article class="entry"><div class="id">10<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Naming</span></div>
+      <h3>Call it Stepmeter for Jira</h3>
+      <dl><dt>Why</dt><dd>"Step" is the unit Atlassian uses to measure automation usage, so the name says what the tool is about. Atlassian's brand guidelines for Marketplace vendors ask that app names avoid the word "Atlassian" and place the product name after a preposition, as in "for Jira".</dd></dl>
     </div></article>
 
   </div>
-</section>
-
-<section aria-labelledby="risks">
-  <h2 id="risks">Things to verify before building</h2>
-  <ul>
-    <li>Whether Atlassian already offers knowledge-gap detection for help centers, through the virtual service agent, Rovo Service or elsewhere. One article found no such report, and an open request says the virtual agent doesn't learn from interactions, but this needs a hands-on check.</li>
-    <li>Getting Rovo on a developer site. One community report says Rovo agents weren't enabled for a site registered with a personal Gmail address. Check trial options or a work-email sign-up early.</li>
-    <li>Whether the built-in evaluation flow works for Forge-built agents. A developer thread says it's unclear; Atlassian folks have pointed to offline evals instead.</li>
-    <li>Role level. Recent JSM Cloud PM roles in Bengaluru asked for 3 to 5+ years of product experience, so frame the 32 months plus this build carefully.</li>
-  </ul>
 </section>
 
 <section aria-labelledby="sources">
   <h2 id="sources">Sources</h2>
   <ul class="sources">
-    <li><a href="https://support.atlassian.com/rovo/docs/work-with-service-triage-agent/">Work with Service Triage agent (Atlassian Support)</a></li>
-    <li><a href="https://support.atlassian.com/rovo/docs/evaluate-the-performance-of-your-rovo-agent/">Evaluate the performance of your Rovo agent (Atlassian Support)</a></li>
-    <li><a href="https://support.atlassian.com/rovo/docs/review-live-conversations-with-your-rovo-agent/">Review live conversations with your Rovo agent (Atlassian Support)</a></li>
-    <li><a href="https://jira.atlassian.com/browse/ROVO-721">ROVO-721: Compliance dashboard for Rovo agents (feature request)</a></li>
-    <li><a href="https://jira.atlassian.com/browse/ROVO-154">ROVO-154: Improve audit log data about Rovo (feature request)</a></li>
-    <li><a href="https://community.atlassian.com/forums/Atlassian-AI-Rovo-discussions/How-are-we-validating-Rovo-Agent-data-boundaries-before/m-p/3243803">Validating Rovo agent data boundaries (Atlassian Community)</a></li>
-    <li><a href="https://community.developer.atlassian.com/t/question-about-evaluation-support-for-marketplace-app-based-rovo-agents/99545">Evaluation support for Forge-based Rovo agents (Developer Community)</a></li>
-    <li><a href="https://developer.atlassian.com/platform/forge/build-a-hello-world-rovo-agent/">Build a Rovo Agent hello world app (Forge docs)</a></li>
-    <li><a href="https://jira.atlassian.com/browse/AUTO-2207">AUTO-2207: Rule Management API returns sensitive values in clear text</a></li>
-    <li><a href="https://community.developer.atlassian.com/t/using-automation-rest-api-with-oauth-token/90125">Using the Automation REST API with OAuth (Developer Community)</a></li>
-    <li><a href="https://techrepublic.com/article/news-atlassian-rovo-automation-pricing">Atlassian Rovo and automation usage pricing (TechRepublic, Sep 2026)</a></li>
+    <li><a href="https://support.atlassian.com/cloud-automation/docs/how-is-my-usage-calculated/">How is your automation usage calculated (Atlassian Support)</a></li>
     <li><a href="https://www.atlassian.com/resources/usage">Usage visibility and controls (Atlassian)</a></li>
-    <li><a href="https://support.atlassian.com/cloud-automation/docs/how-is-my-usage-calculated/">How is my automation usage calculated (Atlassian Support)</a></li>
-    <li><a href="https://jira.atlassian.com/browse/JSDCLOUD-1743">JSDCLOUD-1743: Vote on an issue in the customer portal (491 votes)</a></li>
-    <li><a href="https://developer.atlassian.com/platform/forge/access-to-forge-apps-for-unlicensed-jsm-users">Forge access for unlicensed JSM users (Forge docs)</a></li>
-    <li><a href="https://support.atlassian.com/jira-service-management-cloud/docs/manage-knowledge-bases-with-rovo/">Manage knowledge bases with Rovo (Atlassian Support)</a></li>
-    <li><a href="https://www.atlassian.com/software/rovo/use-cases/draft-and-update-knowledge-base-articles">Draft and update knowledge base articles (Rovo use case)</a></li>
-    <li><a href="https://jimiwikman.se/atlassian/atlassian-resources/atlassian-app-updates/rovo-create-knowledge-base-articles-with-ai-in-jira-service-management-r844/">Rovo: create KB articles with AI in JSM (release roundup)</a></li>
-    <li><a href="https://jira.atlassian.com/browse/ROVO-516">ROVO-516: Public APIs for Rovo agent management (feature request)</a></li>
+    <li><a href="https://techrepublic.com/article/news-atlassian-rovo-automation-pricing">Atlassian Rovo and automation pricing (TechRepublic, Sep 2026)</a></li>
+    <li><a href="https://jira.atlassian.com/browse/AUTO-2207">AUTO-2207: Rule Management API returns sensitive values in clear text</a></li>
+    <li><a href="https://community.developer.atlassian.com/t/using-automation-rest-api-with-oauth-token/90125">Using the Automation REST API with an OAuth token (Developer Community)</a></li>
+    <li><a href="https://support.atlassian.com/rovo/docs/work-with-service-triage-agent/">Work with Service Triage agent (Atlassian Support)</a></li>
+    <li><a href="https://jira.atlassian.com/browse/ROVO-516">ROVO-516: Public APIs for Rovo agent management</a></li>
+    <li><a href="https://jira.atlassian.com/browse/ROVO-721">ROVO-721: Compliance dashboard for Rovo agents</a></li>
+    <li><a href="https://jira.atlassian.com/browse/ROVO-154">ROVO-154: Improve audit log data for Rovo</a></li>
     <li><a href="https://community.developer.atlassian.com/t/calling-rovo-from-a-forge-app/99784">Calling Rovo from a Forge app (Developer Community)</a></li>
-    <li><a href="https://support.atlassian.com/rovo/docs/track-how-often-a-rovo-agent-is-used/">Track how often a Rovo agent is used (Atlassian Support)</a></li>
-    <li><a href="https://jira.atlassian.com/browse/JSDCLOUD-15000">JSDCLOUD-15000: Virtual agent learning and knowledge base integration (feature request)</a></li>
-    <li><a href="https://www.tryrisotto.com/blog/jira-service-management-virtual-service-agent">JSM virtual service agent guide (Risotto)</a></li>
-    <li><a href="https://community.atlassian.com/forums/Rovo-questions/Rovo-agent-dropdown-disabled-in-automation/qaq-p/3151642">Rovo agent dropdown disabled in automation (Atlassian Community)</a></li>
+    <li><a href="https://support.atlassian.com/jira-service-management-cloud/docs/manage-knowledge-bases-with-rovo/">Manage knowledge bases with Rovo (Atlassian Support)</a></li>
+    <li><a href="https://jira.atlassian.com/browse/JSDCLOUD-1743">JSDCLOUD-1743: Vote on an issue in the customer portal</a></li>
+    <li><a href="https://jira.atlassian.com/browse/CONFCLOUD-65867">CONFCLOUD-65867: Link report and validator</a></li>
+    <li><a href="https://developer.atlassian.com/platform/marketplace/atlassian-brand-guidelines-for-marketplace-vendors/">Atlassian brand guidelines for Marketplace vendors</a></li>
   </ul>
-  <p class="note">This log is updated by Claude as decisions are made in conversation.</p>
 </section>
 </div>
-
 </body>
 </html>
