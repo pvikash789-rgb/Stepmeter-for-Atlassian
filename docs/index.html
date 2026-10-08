@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Step Cost Build Journal</title>
+<title>Stepmeter Build Journal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -74,14 +74,14 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
-<nav style="max-width:860px;margin:0 auto;padding:16px 16px 0;font-family:var(--mono);font-size:.8rem"><a href="decisions.html">Decision log &rarr;</a> &middot; <a href="https://github.com/">Repository</a></nav>
+<nav style="max-width:860px;margin:0 auto;padding:16px 16px 0;font-family:var(--mono);font-size:.8rem"><a href="decisions.html">Decision log &rarr;</a> &middot; <a href="https://github.com/pvikash789-rgb/Stepmeter-for-Atlassian">Code on GitHub</a></nav>
 
 <div class="wrap">
 
 <header>
   <div class="eyebrow">Build journal · Vikash Kumar · Work in progress</div>
-  <h1>Automation step-cost optimizer</h1>
-  <p class="lede">A tool that tells Atlassian Cloud admins which automation rules will cost the most under metered billing, and how to rewrite them to cost less.</p>
+  <h1>Stepmeter for Atlassian</h1>
+  <p class="lede">An automation cost tool that tells Atlassian Cloud admins which automation rules will cost the most under metered billing, and how to rewrite them to cost less.</p>
   <div class="facts">
     <span class="fact">Started <b>8 Oct 2026</b></span>
     <span class="fact">Billing change <b>3 Dec 2026</b></span>
@@ -107,7 +107,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
     <div class="stage"><div class="count">3</div><div><p>Early ideas in Jira Service Management and Rovo, each killed by research.</p><p class="sub">Details below. The pattern: Atlassian ships fast, and some data is out of reach for outside apps.</p></div></div>
     <div class="stage"><div class="count">~20</div><div><p>Ideas scouted across four tracks: Jira and Product Discovery, Confluence and Loom, Jira Service Management, and Rovo plus admin.</p><p class="sub">Sources: public feature requests and their votes, community threads, Marketplace apps and their installs, Atlassian docs and release notes.</p></div></div>
     <div class="stage"><div class="count">4</div><div><p>Survived three gates: real demand, not already shipped by Atlassian, and data reachable through a public API.</p><p class="sub">Shortlist: this tool, an "I'm affected too" button for the service portal (491 votes, open since 2015), idea-to-delivery sync for Product Discovery, and a broken-link checker for Confluence.</p></div></div>
-    <div class="stage"><div class="count">1</div><div><p>Chosen: the automation step-cost optimizer.</p><p class="sub">Urgent, affects nearly every paying cloud org at once, and the value is measured in money saved.</p></div></div>
+    <div class="stage"><div class="count">1</div><div><p>Chosen: an automation step-cost tool, now named Stepmeter for Atlassian.</p><p class="sub">Urgent, affects nearly every paying cloud org at once, and the value is measured in money saved.</p></div></div>
   </div>
 </section>
 

@@ -1,6 +1,6 @@
-# Automation step-cost optimizer
+# Stepmeter for Atlassian
 
-A tool that shows Atlassian Cloud admins which automation rules will cost the most under metered billing, and how to rewrite them to cost less.
+Find which Jira and Confluence automation rules will cost the most under Atlassian's per-step billing, and how to rewrite them to cost less.
 
 **Status:** Phase 0, validating before building. Started 8 October 2026.
 
