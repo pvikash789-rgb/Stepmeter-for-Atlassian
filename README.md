@@ -2,15 +2,15 @@
 
 Find which Jira and Confluence automation rules will cost the most under Atlassian's per-step billing, and how to rewrite them to cost less.
 
-**Status:** Phase 0, validating before building. Started 8 October 2026.
+**Status:** Phase 0, validating before building. Started 8 October 2026. First test: the step model matched Atlassian's count exactly (11 of 11 steps on 5 runs).
 
-**Build journal:** https://pvikash789-rgb.github.io/stepmeter-for-jira/
+**Build journal:** https://pvikash789-rgb.github.io/Stepmeter-for-Jira/
 
 ## Why this exists
 
 From 3 December 2026, Atlassian Cloud measures automation usage in steps. Each trigger, condition, action, branch and loop that runs counts as one step, including a trigger that finds nothing to act on. Steps come from a monthly allowance pooled across the organisation, extra usage is billed at $0.50 per 1,000 steps and is on by default, and Enterprise plans move from unlimited automation to an allowance.
 
-Cost now depends on how each rule is built. A daily scheduled rule that loops over 500 work items and edits each one uses at least 15,000 steps a month on its own. Atlassian Administration shows usage by meter and app. From the public documentation I couldn't find a view that ranks individual rules by step cost, and Phase 0 checks this in the product.
+Cost now depends on how each rule is built. A daily scheduled rule that loops over 500 work items and edits each one uses at least 15,000 steps a month on its own. Atlassian shows usage by meter and app, and each space's Automation Usage tab ranks flows by estimated steps. What it doesn't show is how many steps went to runs that did nothing, or how to change a flow to use fewer. In the test site, 4 of one flow's 7 steps were spent on runs that stopped at a condition.
 
 ## What it will do
 
@@ -47,6 +47,6 @@ Python 3.8 or newer, standard library only. Output goes to `phase0/output/`, whi
 
 ## About
 
-Built by Vikash Kumar. I use an AI assistant (Claude) for research and coding. Problem choice, product decisions and trade-offs are mine and are recorded in the [decision log](https://pvikash789-rgb.github.io/stepmeter-for-jira/decisions.html).
+Built by Vikash Kumar. I use an AI assistant (Claude) for research and coding. Problem choice, product decisions and trade-offs are mine and are recorded in the [decision log](https://pvikash789-rgb.github.io/Stepmeter-for-Jira/decisions.html).
 
 Not affiliated with or endorsed by Atlassian. Jira and Confluence are trademarks of Atlassian.
