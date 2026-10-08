@@ -15,7 +15,7 @@ We answer three questions:
 ## Day 1: Set up a test site
 
 1. Create a free Atlassian Cloud site with Jira at atlassian.com (any name, e.g. `stepcost-lab`). Use an email you can keep long term.
-2. Create one Scrum project (e.g. `LAB`) and add about 30 work items. The quickest way is to import [`lab-work-items.csv`](lab-work-items.csv), which has 30 items with mixed work types, priorities and labels (6 labelled `vip`). Give some of them sub-tasks, a few labels and mixed priorities so rules have something to act on.
+2. Create one Scrum project (e.g. `LAB`) and add about 30 work items. The quickest way is to import [`lab-work-items.csv`](lab-work-items.csv), which has 30 items with mixed work types and labels (6 labelled `vip`). Team-managed spaces may not accept the Priority column; skip it, the rules use labels instead. Give some of them sub-tasks, a few labels and mixed priorities so rules have something to act on.
 3. Create the test rules in the next section (Project settings, then Automation, or the global Automation page).
 4. Create an API token for your Atlassian account (Account settings, then Security, then API tokens). Treat it like a password.
 
@@ -26,20 +26,20 @@ Each rule is chosen to exercise one pattern that affects step cost. Keep the nam
 | # | Name | Build it like this | What it tests |
 |---|------|--------------------|---------------|
 | 1 | `01 simple event` | Work item created, then Assign to reporter | Cheapest pattern: 2 steps |
-| 2 | `02 condition first` | Work item transitioned to Done, then If priority = High, then Add comment | Condition placed early |
+| 2 | `02 condition first` | Work item transitioned to Done, then If labels contain `vip`, then Add comment | Condition placed early |
 | 3 | `03 noisy trigger` | Work item updated (any change), then If label = `vip`, then Add comment | Broad trigger that mostly finds nothing but still counts |
-| 4 | `04 field change narrow` | Field value changed: Priority only, then Add comment | Same intent as #3 with a narrow trigger |
+| 4 | `04 field change narrow` | Field value changed: Labels only, then Add comment | Same intent as #3 with a narrow trigger |
 | 5 | `05 daily jql` | Scheduled daily with JQL `project = LAB AND status = "In Progress" AND updated < -7d`, then Add comment | Scheduled rule running per matching item |
 | 6 | `06 hourly no jql` | Scheduled every hour, no JQL, then Log action | Runs whether or not there is work |
 | 7 | `07 subtask branch` | Work item transitioned to Done, then For sub-tasks: Transition to Done | Branch that multiplies by sub-task count |
 | 8 | `08 jql branch` | Work item created, then For JQL `project = LAB AND labels = vip`: Edit field | Branch over a search result |
-| 9 | `09 if else` | Work item created, then If/else: priority High adds label `urgent`, else adds label `normal` | If/else blocks |
+| 9 | `09 if else` | Work item created, then If/else: labels contain `backend` adds label `team-a`, else adds label `team-b` | If/else blocks |
 | 10 | `10 many actions` | Work item created, then Lookup work items, Create variable, Add comment, Edit field, Send email | Many actions in one run |
 | 11 | `11 webhook secret` | Work item created, then Send web request to `https://example.com/hook/test-secret-path` with header `Authorization: Bearer test-secret-123` | Secret redaction. The URL is fake and won't receive anything. |
 | 12 | `12 manual` | Manual trigger, then Add comment | Runs only when a person triggers it |
 | 13 | `13 incoming webhook` | Incoming webhook trigger, then Add comment | External trigger |
 | 14 | `14 weekly create` | Scheduled weekly on Monday, no JQL, then Create work item | Recurring work creation |
-| 15 | `15 condition last` | Work item updated, then Edit field, then If priority = High, then Add comment | Anti-pattern: work done before the check |
+| 15 | `15 condition last` | Work item updated, then Edit field (for example set Description), then If labels contain `vip`, then Add comment | Anti-pattern: work done before the check |
 | 16 | `16 disabled` | Any simple rule, then disable it | Disabled rules should cost nothing |
 | 17 | `17 rovo action` | Work item created, then Use Rovo agent (only if offered on your plan) | Agent actions bill Rovo credits, not steps |
 
