@@ -153,6 +153,15 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <dl><dt>Why</dt><dd>"Step" is the unit Atlassian uses to measure automation usage, so the name says what the tool is about. Atlassian's brand guidelines for Marketplace vendors ask that app names avoid the word "Atlassian" and place the product name after a preposition, as in "for Jira".</dd></dl>
     </div></article>
 
+    <article class="entry"><div class="id">11<span>8 Oct</span></div><div class="body">
+      <div class="meta"><span class="tag">Phase 0 finding</span><span class="tag">Focus</span></div>
+      <h3>Focus on wasted steps and fixes, not on ranking flows</h3>
+      <dl><dt>Finding</dt><dd>Each space's Automation Usage tab already lists high-usage flows with runs and estimated steps. My earlier assumption, based on the public documentation, was wrong.</dd>
+      <dt>Gap</dt><dd>The Usage tab shows totals only. In the test site, one flow used 7 steps over 3 runs, and 4 of those steps went to two runs that stopped at a condition and did nothing. Nothing on the tab shows that, or what to change.</dd>
+      <dt>New focus</dt><dd>For each flow, show how much of its cost goes to runs that do nothing, explain which part of the flow causes it, and suggest a rewrite with the expected saving before anything is changed.</dd>
+      <dt>Evidence</dt><dd>My step model matched Atlassian's count exactly: 11 of 11 steps across 5 runs on 3 flows.</dd></dl>
+    </div></article>
+
   </div>
 </section>
 

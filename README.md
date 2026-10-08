@@ -14,10 +14,12 @@ Cost now depends on how each rule is built. A daily scheduled rule that loops ov
 
 ## What it will do
 
-1. Read every automation rule on a site through the Automation Rule Management API.
-2. Estimate each rule's monthly step cost.
-3. Rank the most expensive rules in money terms.
-4. Suggest specific rewrites that use fewer steps.
+Atlassian's Usage tab tells you which flows use the most steps. Stepmeter will tell you how much of that is wasted and how to fix it:
+
+1. Read each automation flow's structure through the Automation Rule Management API.
+2. Work out how many steps each run uses and how many go to runs that do nothing.
+3. Point to the part of the flow that causes the waste.
+4. Suggest a rewrite and estimate the saving before anything is changed.
 
 Secrets inside rules (webhook URLs, headers, tokens) are stripped before processing, and rule data isn't kept.
 

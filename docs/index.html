@@ -95,7 +95,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   <p>Atlassian Administration shows usage by meter and app, with forecasts, alerts and limits, and each space's Automation page has a Usage tab that lists its highest-usage flows with runs and estimated steps. What it doesn't show is how many of those steps went to runs that did nothing, or how to change a flow so it uses fewer. In my test site, 4 of one flow's 7 steps were spent on runs that stopped at a condition, and nothing on the Usage tab says so.</p>
   <div class="callout">
     <h3>What the tool will do</h3>
-    <p>Read every automation rule on a site, estimate each rule's monthly step cost, rank the most expensive ones in money terms, and suggest specific rewrites that use fewer steps. Secrets inside rules, such as webhook URLs and headers, are stripped before anything is processed, and rule data isn't kept.</p>
+    <p>For each automation flow, show how much of its step cost goes to runs that do nothing, point to the part of the flow that causes it, and suggest a rewrite with the expected saving, before anything is changed. Secrets inside flows, such as webhook URLs and headers, are stripped before anything is processed, and flow data isn't kept.</p>
   </div>
 </section>
 
@@ -166,6 +166,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
       <p><strong>The step model matched exactly.</strong> Counting one step per trigger, condition and action that ran, I predicted 11 steps across 5 runs. The Usage tab reported 11: 2, 2 and 7.</p>
       <p><strong>Atlassian already ranks flows by steps.</strong> Each space's Automation Usage tab has a "High usage flows" table with runs and estimated steps, sortable by steps. My assumption from the public documentation was wrong, which is what this phase was for. The tab also lags: it took about two hours to show the new runs.</p>
       <p><strong>The gap is waste and the fix, not the ranking.</strong> The broad flow ran 3 times for 7 steps. Two runs stopped at the condition and did nothing, yet used 4 of the 7 steps. The audit log shows those runs as "No actions performed", but the Usage tab only shows the total. Telling an admin how much of a flow's cost is wasted, and how to rewrite it, needs both the flow's structure and its run results together.</p>
+      <p><strong>Decision:</strong> Stepmeter will focus on wasted steps and how to fix them, not on ranking flows (decision 11).</p>
     </article>
     <article class="entry">
       <div class="date">8 Oct 2026 · Day 0, evening</div>
