@@ -1,0 +1,15 @@
+# Secrets
+.env
+*.token
+
+# Raw or redacted rule data from real sites
+phase0/output/
+output/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store

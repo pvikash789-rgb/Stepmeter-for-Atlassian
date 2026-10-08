@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Step Cost Build Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a case-study column. Problem first, then the discovery funnel, approach, build phases, and a dated journal at the end. */
+:root{
+  --bg:#f4f5f2; --surface:#ffffff; --fg:#1d2320; --muted:#5d6862; --line:#d9ded9;
+  --accent:#2e5c8a; --accent-soft:#e3ecf5; --kill:#9a3b2f; --kill-soft:#f6e6e3; --ok:#2c6b3f; --ok-soft:#e3f1e6; --warn:#8a5a00; --warn-soft:#fbf0d9;
+  --display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131614; --surface:#1b201d; --fg:#e5e9e6; --muted:#9ca8a1; --line:#2d3530;
+  --accent:#8db8e3; --accent-soft:#1b2a3a; --kill:#e8988c; --kill-soft:#33201d; --ok:#7fc994; --ok-soft:#18291d; --warn:#e8b65c; --warn-soft:#2e2615; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131614; --surface:#1b201d; --fg:#e5e9e6; --muted:#9ca8a1; --line:#2d3530;
+  --accent:#8db8e3; --accent-soft:#1b2a3a; --kill:#e8988c; --kill-soft:#33201d; --ok:#7fc994; --ok-soft:#18291d; --warn:#e8b65c; --warn-soft:#2e2615; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.65}
+.wrap{max-width:780px;margin:0 auto;padding-inline:16px;padding-block:44px 72px;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+h1{font-size:2.3rem;font-weight:600}
+h2{font-size:1.4rem;font-weight:600}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header{display:flex;flex-direction:column;gap:10px}
+.lede{font-size:1.08rem;color:var(--fg)}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.fact{font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:3px 8px;color:var(--muted)}
+.fact b{color:var(--fg);font-weight:500}
+section{display:flex;flex-direction:column;gap:14px}
+.callout{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.funnel{display:flex;flex-direction:column;gap:6px}
+.stage{display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.stage:last-child{border-bottom:none}
+.count{font-family:var(--display);font-size:1.6rem;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.1;text-align:right}
+.stage p{font-size:.95rem}
+.stage .sub{color:var(--muted);font-size:.88rem}
+.kills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.kills{grid-template-columns:1fr}}
+.kill{background:var(--kill-soft);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.kill .why{font-size:.88rem}
+.kill .lesson{font-size:.84rem;color:var(--muted)}
+.tag{font-family:var(--mono);font-size:.7rem;color:var(--kill);text-transform:uppercase;letter-spacing:.06em}
+ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.phases{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.phase{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+@media (max-width:540px){.phase{grid-template-columns:1fr;gap:4px}}
+.phase .when{font-family:var(--mono);font-size:.8rem;color:var(--muted);display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.phase .body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pill{font-family:var(--mono);font-size:.7rem;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.pill.now{background:var(--accent-soft);color:var(--accent)}
+.pill.next{border:1px solid var(--line);color:var(--muted)}
+.pill.done{background:var(--ok-soft);color:var(--ok)}
+.metrics{width:100%;border-collapse:collapse;font-size:.92rem}
+.tablewrap{overflow-x:auto}
+.metrics th,.metrics td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.metrics th{font-family:var(--mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500}
+.metrics td.v{font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.journal{display:flex;flex-direction:column;gap:18px}
+.entry{display:flex;flex-direction:column;gap:8px;padding-left:16px;border-left:2px solid var(--line)}
+.entry .date{font-family:var(--mono);font-size:.78rem;color:var(--accent)}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.note{font-size:.86rem;color:var(--muted)}
+.sources li{font-size:.9rem}
+</style>
+</head>
+<body>
+<nav style="max-width:860px;margin:0 auto;padding:16px 16px 0;font-family:var(--mono);font-size:.8rem"><a href="decisions.html">Decision log &rarr;</a> &middot; <a href="https://github.com/">Repository</a></nav>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Build journal · Vikash Kumar · Work in progress</div>
+  <h1>Automation step-cost optimizer</h1>
+  <p class="lede">A tool that tells Atlassian Cloud admins which automation rules will cost the most under metered billing, and how to rewrite them to cost less.</p>
+  <div class="facts">
+    <span class="fact">Started <b>8 Oct 2026</b></span>
+    <span class="fact">Billing change <b>3 Dec 2026</b></span>
+    <span class="fact">Current phase <b>0 · Validation</b></span>
+  </div>
+</header>
+
+<section aria-labelledby="problem">
+  <h2 id="problem">The problem</h2>
+  <p>From 3 December 2026, Atlassian bills automation per step. Every trigger, condition, action, branch and loop in a rule run counts as one step, even when the trigger finds nothing to do. Steps come from a pooled monthly allowance, overage costs $0.50 per 1,000 steps and is switched on by default, and Enterprise plans lose unlimited automation. If an admin turns overage off, rules stop when the allowance runs out and missed events are not replayed.</p>
+  <p>Admins can see usage per meter and per app, with forecasts and caps. What they can't easily see is which of their hundreds of rules are expensive and how to fix them. One daily rule that branches over 500 issues can burn more steps than fifty simple rules together.</p>
+  <div class="callout">
+    <h3>What the tool does</h3>
+    <p>Connect a site, and it reads every automation rule, estimates each rule's monthly step cost, ranks the worst ones in money terms, and suggests specific cheaper rewrites. Rule data is processed without being stored, and secrets inside rules are stripped.</p>
+  </div>
+</section>
+
+<section aria-labelledby="discovery">
+  <h2 id="discovery">How I found it</h2>
+  <p>I wanted to build something real for Atlassian rather than write a critique of its products. I set one rule for picking the problem: it had to be useful and viable for real customers, not a showcase of my past experience.</p>
+  <div class="funnel">
+    <div class="stage"><div class="count">3</div><div><p>Target companies: Atlassian, ServiceNow, Salesforce. All three are betting on enterprise automation and agents.</p><p class="sub">Atlassian first. It's the company I most want to join, and its Marketplace lets anyone ship to real users.</p></div></div>
+    <div class="stage"><div class="count">3</div><div><p>Early ideas in Jira Service Management and Rovo, each killed by research.</p><p class="sub">Details below. The pattern: Atlassian ships fast, and some data is out of reach for outside apps.</p></div></div>
+    <div class="stage"><div class="count">~20</div><div><p>Ideas scouted across four tracks: Jira and Product Discovery, Confluence and Loom, Jira Service Management, and Rovo plus admin.</p><p class="sub">Sources: public feature requests and their votes, community threads, Marketplace apps and their installs, Atlassian docs and release notes.</p></div></div>
+    <div class="stage"><div class="count">4</div><div><p>Survived three gates: real demand, not already shipped by Atlassian, and data reachable through a public API.</p><p class="sub">Shortlist: this tool, an "I'm affected too" button for the service portal (491 votes, open since 2015), idea-to-delivery sync for Product Discovery, and a broken-link checker for Confluence.</p></div></div>
+    <div class="stage"><div class="count">1</div><div><p>Chosen: the automation step-cost optimizer.</p><p class="sub">Urgent, affects nearly every paying cloud org at once, and the value is measured in money saved.</p></div></div>
+  </div>
+</section>
+
+<section aria-labelledby="deadends">
+  <h2 id="deadends">Dead ends and what they taught me</h2>
+  <div class="kills">
+    <div class="kill"><span class="tag">Already shipped</span><h3>AI ticket triage</h3><p class="why">Jira Service Management already has a Service Triage agent that sets request type, urgency and priority.</p><p class="lesson">Check what exists before designing anything.</p></div>
+    <div class="kill"><span class="tag">No data access</span><h3>Agent governance dashboard</h3><p class="why">Strong demand, but there is no public API to list Rovo agents or read their usage.</p><p class="lesson">Demand isn't enough. Confirm the data is reachable.</p></div>
+    <div class="kill"><span class="tag">Already shipped</span><h3>Knowledge gap finder</h3><p class="why">Atlassian shipped this in April 2026. I'd shortlisted it before checking, which cost a round.</p><p class="lesson">Made the shipped check gate one for every idea.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="approach">
+  <h2 id="approach">How I'm approaching the build</h2>
+  <ul>
+    <li><strong>Validate before building.</strong> A three-day spike with written kill criteria comes first. If the rule API doesn't give what we need, or admins already know their expensive rules, I switch to the backup idea.</li>
+    <li><strong>Be honest about estimates.</strong> No public API reports how often each rule runs, so run frequency is estimated. I'll measure the estimate against Atlassian's real usage figure and publish the error.</li>
+    <li><strong>Treat security as a feature.</strong> The rule API returns webhook URLs and credentials in plain text. The tool strips them and never stores rule data.</li>
+    <li><strong>Real users before launch.</strong> 5 to 10 admins run it on their own sites before any public post.</li>
+    <li><strong>How I work.</strong> I use an AI assistant (Claude) for research and coding. Problem choice, product decisions and trade-offs are mine, and each one is recorded with its reasoning in a decision log.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="plan">
+  <h2 id="plan">Build plan</h2>
+  <div class="phases">
+    <div class="phase"><div class="when">Days 1 to 3<span class="pill now">In progress</span></div><div class="body"><h3>Phase 0 · Validate</h3><p>Kit ready: 17 test rules, spike script, interview guide. Test site with realistic rules. Confirm the rule API returns usable structure. Record what Atlassian's usage screen shows per rule. Interview 3 to 5 Jira admins.</p></div></div>
+    <div class="phase"><div class="when">Weeks 1 to 2<span class="pill next">Next</span></div><div class="body"><h3>Phase 1 · Cost engine</h3><p>Parse each rule into its components, count steps per run, estimate run frequency, and check totals against real usage. Target: within about 20%.</p></div></div>
+    <div class="phase"><div class="when">Weeks 2 to 3<span class="pill next">Planned</span></div><div class="body"><h3>Phase 2 · Recommendations and report</h3><p>Rank expensive rules, show savings in money, suggest rewrites, strip secrets.</p></div></div>
+    <div class="phase"><div class="when">Week 4<span class="pill next">Planned</span></div><div class="body"><h3>Phase 3 · Beta</h3><p>5 to 10 admins run it on their own sites. Track savings found, accuracy and confusion points.</p></div></div>
+    <div class="phase"><div class="when">Week 5<span class="pill next">Planned</span></div><div class="body"><h3>Phase 4 · Launch and outreach</h3><p>One-page write-up, short demo video, public post, then outreach to Atlassian product managers, well before 3 December.</p></div></div>
+  </div>
+</section>
+
+<section aria-labelledby="results">
+  <h2 id="results">Results so far</h2>
+  <div class="tablewrap">
+  <table class="metrics">
+    <thead><tr><th>Measure</th><th>Target</th><th>Actual</th></tr></thead>
+    <tbody>
+      <tr><td>Jira admins interviewed</td><td>3 to 5</td><td class="v">Not started</td></tr>
+      <tr><td>Estimate accuracy against real usage</td><td>Within ~20%</td><td class="v">Not measured</td></tr>
+      <tr><td>Beta sites</td><td>5 to 10</td><td class="v">0</td></tr>
+      <tr><td>Monthly savings found across beta sites</td><td>Report as found</td><td class="v">Not measured</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section aria-labelledby="journal">
+  <h2 id="journal">Journal</h2>
+  <div class="journal">
+    <article class="entry">
+      <div class="date">8 Oct 2026 · Day 0, evening</div>
+      <h3>Phase 0 kit ready, building in public</h3>
+      <p>Decided to build in a public GitHub repository so the history of the work is visible as it happens.</p>
+      <p>Wrote the Phase 0 kit: 17 test automation rules, each designed to exercise one pattern that changes step cost (noisy triggers, conditions placed last, branches over sub-tasks and searches, hourly schedules), a spike script that lists and reads every rule, and an interview guide for Jira admins.</p>
+      <p>The rule API returns secrets in plain text, so the script strips URLs, headers and tokens before saving anything. Tested it offline against a fake rule with four planted secrets: all four were removed and the component counts came out right.</p>
+    </article>
+    <article class="entry">
+      <div class="date">8 Oct 2026 · Day 0</div>
+      <h3>From a vague plan to one problem</h3>
+      <p>Started with a rough idea: research products at Atlassian, ServiceNow and Salesforce, build something, and share it with people there. Narrowed it to proof-of-work over critique, and Atlassian first.</p>
+      <p>Spent the day on discovery. Three early ideas died on research: two were already shipped and one had no data access. Ran a wider scout of about 20 ideas with strict gates, verified the shortlist's key facts, and chose the automation step-cost optimizer.</p>
+      <p>Before building, confirmed two things that shape the design. The rule API works with an admin API token, which means a web tool instead of a Marketplace app. It also returns secrets in plain text, which makes redaction a core requirement.</p>
+    </article>
+  </div>
+</section>
+
+<section aria-labelledby="sources">
+  <h2 id="sources">Key sources</h2>
+  <ul class="sources">
+    <li><a href="https://techrepublic.com/article/news-atlassian-rovo-automation-pricing">Atlassian Rovo and automation pricing (TechRepublic, Sep 2026)</a></li>
+    <li><a href="https://www.atlassian.com/resources/usage">Usage visibility and controls (Atlassian)</a></li>
+    <li><a href="https://support.atlassian.com/cloud-automation/docs/how-is-my-usage-calculated/">How is my automation usage calculated (Atlassian Support)</a></li>
+    <li><a href="https://jira.atlassian.com/browse/AUTO-2207">AUTO-2207: Rule Management API returns sensitive values in clear text</a></li>
+    <li><a href="https://support.atlassian.com/rovo/docs/work-with-service-triage-agent/">Work with Service Triage agent (Atlassian Support)</a></li>
+    <li><a href="https://jira.atlassian.com/browse/ROVO-516">ROVO-516: Public APIs for Rovo agent management</a></li>
+    <li><a href="https://support.atlassian.com/jira-service-management-cloud/docs/manage-knowledge-bases-with-rovo/">Manage knowledge bases with Rovo (Atlassian Support)</a></li>
+  </ul>
+  <p class="note">Every call and its reasoning is in the <a href="decisions.html">decision log</a>.</p>
+</section>
+
+</div>
+
+</body>
+</html>
