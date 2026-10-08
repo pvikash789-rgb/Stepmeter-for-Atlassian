@@ -1,0 +1,31 @@
+Summary,Issue Type,Priority,Labels,Description
+Login page times out on slow networks,Bug,High,vip,Test work item 1 for automation step-cost testing.
+Add export to CSV on reports,Task,Medium,frontend,Test work item 2 for automation step-cost testing.
+Update onboarding email copy,Story,Low,frontend,Test work item 3 for automation step-cost testing.
+Fix broken link in help footer,Bug,High,backend,Test work item 4 for automation step-cost testing.
+Dashboard loads slowly for large teams,Bug,Medium,frontend,Test work item 5 for automation step-cost testing.
+Rename 'Projects' tab to 'Spaces',Task,Low,vip,Test work item 6 for automation step-cost testing.
+Password reset email not arriving,Bug,High,backend,Test work item 7 for automation step-cost testing.
+Add dark mode toggle,Task,Medium,frontend,Test work item 8 for automation step-cost testing.
+Audit user permissions for Q4,Story,Low,frontend,Test work item 9 for automation step-cost testing.
+Mobile layout breaks on small screens,Bug,High,backend,Test work item 10 for automation step-cost testing.
+Add search to settings page,Story,Medium,vip,Test work item 11 for automation step-cost testing.
+Clean up unused feature flags,Task,Low,frontend,Test work item 12 for automation step-cost testing.
+Billing page shows wrong currency,Bug,High,backend,Test work item 13 for automation step-cost testing.
+Write release notes for v2.3,Task,Medium,frontend,Test work item 14 for automation step-cost testing.
+Improve error message on failed upload,Story,Low,frontend,Test work item 15 for automation step-cost testing.
+Add SSO option for enterprise,Task,High,vip,Test work item 16 for automation step-cost testing.
+Fix timezone bug in scheduler,Bug,Medium,frontend,Test work item 17 for automation step-cost testing.
+Archive old marketing pages,Task,Low,frontend,Test work item 18 for automation step-cost testing.
+Add retry to webhook sender,Story,High,backend,Test work item 19 for automation step-cost testing.
+Update privacy policy link,Task,Medium,frontend,Test work item 20 for automation step-cost testing.
+Speed up CI pipeline,Story,Low,vip,Test work item 21 for automation step-cost testing.
+Add tooltip to usage chart,Task,High,backend,Test work item 22 for automation step-cost testing.
+Fix duplicate notifications,Bug,Medium,frontend,Test work item 23 for automation step-cost testing.
+Support bulk invite,Task,Low,frontend,Test work item 24 for automation step-cost testing.
+Translate checkout page to Hindi,Story,High,backend,Test work item 25 for automation step-cost testing.
+Remove legacy API endpoint,Task,Medium,vip,Test work item 26 for automation step-cost testing.
+Add keyboard shortcuts,Story,Low,frontend,Test work item 27 for automation step-cost testing.
+Fix PDF export alignment,Bug,High,backend,Test work item 28 for automation step-cost testing.
+Review accessibility of forms,Story,Medium,frontend,Test work item 29 for automation step-cost testing.
+Add audit log to admin page,Task,Low,frontend,Test work item 30 for automation step-cost testing.

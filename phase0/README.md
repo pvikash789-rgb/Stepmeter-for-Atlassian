@@ -15,7 +15,7 @@ We answer three questions:
 ## Day 1: Set up a test site
 
 1. Create a free Atlassian Cloud site with Jira at atlassian.com (any name, e.g. `stepcost-lab`). Use an email you can keep long term.
-2. Create one Scrum project (e.g. `LAB`) and add about 30 work items. Give some of them sub-tasks, a few labels and mixed priorities so rules have something to act on.
+2. Create one Scrum project (e.g. `LAB`) and add about 30 work items. The quickest way is to import [`lab-work-items.csv`](lab-work-items.csv), which has 30 items with mixed work types, priorities and labels (6 labelled `vip`). Give some of them sub-tasks, a few labels and mixed priorities so rules have something to act on.
 3. Create the test rules in the next section (Project settings, then Automation, or the global Automation page).
 4. Create an API token for your Atlassian account (Account settings, then Security, then API tokens). Treat it like a password.
 
