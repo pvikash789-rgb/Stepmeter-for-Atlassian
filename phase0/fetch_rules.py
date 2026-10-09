@@ -177,14 +177,47 @@ def main():
         sys.exit(f"   Could not get cloudId (HTTP {status}): {info}")
     print(f"   cloudId: {cloud_id}")
 
-    base = f"https://{site}/gateway/api/automation/public/jira/{cloud_id}/rest/v1"
+    print("   Checking your login against the standard Jira API ...")
+    status, me = make_request(f"https://{site}/rest/api/3/myself", basic)
+    if status == 200:
+        print(f"   Login OK as {me.get('displayName', '?')}. Email and token are fine.")
+    else:
+        print(f"   Login check failed (HTTP {status}). Either the email or token is wrong,")
+        print("   or this is a scoped token, which only works through api.atlassian.com.")
 
-    print("2. Listing rules ...")
+    bearer = f"Bearer {token}"
+    site_base = f"https://{site}/gateway/api/automation/public/jira/{cloud_id}/rest/v1"
+    api_base = f"https://api.atlassian.com/automation/public/jira/{cloud_id}/rest/v1"
+    attempts = [
+        ("site address, basic login, POST", site_base, basic, "POST"),
+        ("site address, basic login, GET", site_base, basic, "GET"),
+        ("api.atlassian.com, basic login, POST", api_base, basic, "POST"),
+        ("api.atlassian.com, basic login, GET", api_base, basic, "GET"),
+        ("api.atlassian.com, bearer login, POST", api_base, bearer, "POST"),
+        ("site address, bearer login, POST", site_base, bearer, "POST"),
+    ]
+    print("2. Finding a way to list rules ...")
+    base = auth = method = None
+    for label, b, a, m in attempts:
+        status, data = make_request(f"{b}/rule/summary", a, m, {} if m == "POST" else None)
+        print(f"   {label:40} HTTP {status}")
+        if status == 200:
+            base, auth, method = b, a, m
+            break
+    if not base:
+        print("   None worked. Copy all the lines above into the chat.")
+        return
+    basic = auth  # use whichever login worked for the rest of the run
+
+    print("   Listing rules ...")
     summaries, cursor, page = [], None, 0
     while True:
         page += 1
-        body = {"cursor": cursor} if cursor else {}
-        status, data = make_request(f"{base}/rule/summary", basic, "POST", body)
+        if method == "POST":
+            status, data = make_request(f"{base}/rule/summary", auth, "POST", {"cursor": cursor} if cursor else {})
+        else:
+            q = f"?cursor={cursor}" if cursor else ""
+            status, data = make_request(f"{base}/rule/summary{q}", auth, "GET")
         if status != 200:
             print(f"   HTTP {status}: {data}")
             print("   Spike finding: listing failed. Record this in the journal.")
