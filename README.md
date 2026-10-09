@@ -2,7 +2,7 @@
 
 Find which Jira and Confluence automation rules will cost the most under Atlassian's per-step billing, and how to rewrite them to cost less.
 
-**Status:** Phase 0, validating before building. Started 8 October 2026. First test: the step model matched Atlassian's count exactly (11 of 11 steps on 5 runs).
+**Status:** Phase 0, validating before building. Started 8 October 2026. In the test site, the step model matches Atlassian's count on 56 of 57 steps across 17 runs, and branches and scheduled searches are billed once per work item.
 
 **Build journal:** https://pvikash789-rgb.github.io/Stepmeter-for-Jira/
 
