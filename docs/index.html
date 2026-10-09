@@ -133,7 +133,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 <section aria-labelledby="plan">
   <h2 id="plan">Build plan</h2>
   <div class="phases">
-    <div class="phase"><div class="when">Days 1 to 3<span class="pill now">In progress</span></div><div class="body"><h3>Phase 0 · Validate</h3><p>Build a test site with 17 rules, each covering one cost pattern. Confirm the API returns rule structure. Record what the product shows per rule today. Interview 3 to 5 Jira admins.</p></div></div>
+    <div class="phase"><div class="when">Days 1 to 3<span class="pill now">In progress</span></div><div class="body"><h3>Phase 0 · Validate</h3><p>Done: test site with 9 flows covering the main cost patterns, step model checked against the Usage tab, API confirmed to return full flow structure. Remaining: interviews with 3 to 5 Jira admins.</p></div></div>
     <div class="phase"><div class="when">Weeks 1 to 2<span class="pill next">Next</span></div><div class="body"><h3>Phase 1 · Cost engine</h3><p>Turn each rule into its components, count steps per run, estimate run frequency, and compare totals with real usage. Target: within about 20%.</p></div></div>
     <div class="phase"><div class="when">Weeks 2 to 3<span class="pill next">Planned</span></div><div class="body"><h3>Phase 2 · Recommendations and report</h3><p>Rank expensive rules, show the cost in money, and suggest rewrites.</p></div></div>
     <div class="phase"><div class="when">Week 4<span class="pill next">Planned</span></div><div class="body"><h3>Phase 3 · Beta</h3><p>5 to 10 admins run it on their own sites. Track savings found, accuracy and where they get confused.</p></div></div>
@@ -159,6 +159,14 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 <section aria-labelledby="journal">
   <h2 id="journal">Journal</h2>
   <div class="journal">
+    <article class="entry">
+      <div class="date">9 Oct 2026 · Day 1, mid-morning</div>
+      <h3>The API returns each flow's full structure</h3>
+      <p>Ran the spike script against the test site. It listed all 9 flows and fetched each one's configuration through the Automation Rule Management API, using a classic API token with basic authentication on the site address. My first run failed with HTTP 401 because of a typo in the email address, which a login check added to the script now catches.</p>
+      <p>The response includes what Stepmeter needs to estimate cost per run: each flow's state (enabled or disabled), the trigger type, and every component in order, with branches and their children nested. The trigger type distinguishes a broad "any update" trigger from a narrow field-change trigger, and a scheduled search from an event, which are the patterns behind most of the waste found so far.</p>
+      <p>It does not include how often each flow runs. Run frequency will have to come from another source, which is the main open problem for Phase 1.</p>
+      <p>The web request flow has only one component in the API response, so its extra step on the Usage tab doesn't come from hidden structure. A follow-up test is running.</p>
+    </article>
     <article class="entry">
       <div class="date">9 Oct 2026 · Day 1, morning</div>
       <h3>Loops are billed per work item, and the model holds</h3>

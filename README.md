@@ -27,7 +27,7 @@ Secrets inside rules (webhook URLs, headers, tokens) are stripped before process
 
 | Phase | What | Status |
 |---|---|---|
-| 0 | Validate: API access, what the product already shows, admin interviews | In progress |
+| 0 | Validate: API access (confirmed), what the product already shows (done), admin interviews | In progress |
 | 1 | Cost engine: parse rules, count steps, estimate run frequency, check accuracy | Next |
 | 2 | Recommendations and report | Planned |
 | 3 | Beta with 5 to 10 admins on their own sites | Planned |
